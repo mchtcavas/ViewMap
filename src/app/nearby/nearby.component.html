@@ -1,23 +1,25 @@
 <div>
 <!-- SearchBar -->
-<div class="input-container col-lg-5 float-left border-right" style="height: calc(100vh - .1rem)">
+
+<div [formGroup]="nearbyLocationForm" class="input-container col-lg-5 float-left border-right" style="height: calc(100vh - .1rem)">
   <div class="card-title" style="text-align: center">
     SearchBar
   </div>
-  <div class="input-group">
-    <label for="latitude">Latitude:</label>
-    <input type="number" id="latitude" name="latitude" placeholder="Enter latitude" step="0.000001">
-  </div>
-  <div class="input-group">
-    <label for="longitude">Longitude:</label>
-      <input type="number" id="longitude" name="longitude" placeholder="Enter longitude" step="0.000001">
-  </div>
-  <div class="input-group">
-    <label for="radius">Radius (meters):</label>
-    <input type="number" id="radius" name="radius" placeholder="Enter radius" step="1">
-  </div>
-  <button class="btn btn-primary">Search</button>
+    <div class="input-group">
+      <label for="latitude">Latitude:</label>
+      <input min="-90" max="90" formControlName="latitude" type="number" id="latitude" name="latitude" placeholder="Enter latitude" step="0.000001">
+    </div>
+    <div class="input-group">
+      <label for="longitude">Longitude:</label>
+      <input min="-180" max="180"  formControlName="longitude" type="number" id="longitude" name="longitude" placeholder="Enter longitude" step="0.000001">
+    </div>
+    <div class="input-group">
+      <label for="radius">Radius (meters):</label>
+      <input min="0" formControlName="radius" type="number" id="radius" name="radius" placeholder="Enter radius" step="1">
+    </div>
+    <button (click)="onSubmit()" [disabled]="nearbyLocationForm.invalid" class="btn btn-primary">Search</button>
 </div>
+
 <!-- SearchBar -->
 
 <!-- Nearby Places -->
