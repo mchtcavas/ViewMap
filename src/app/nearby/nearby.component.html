@@ -1,1 +1,49 @@
-<p>nearby works!</p>
+<div>
+<!-- SearchBar -->
+
+<div [formGroup]="nearbyLocationForm" class="input-container col-lg-5 float-left border-right" style="height: calc(100vh - .1rem)">
+  <div class="card-title" style="text-align: center">
+    SearchBar
+  </div>
+    <div class="input-group">
+      <label for="latitude">Latitude:</label>
+      <input min="-90" max="90" formControlName="latitude" type="number" id="latitude" name="latitude" placeholder="Enter latitude" step="0.000001">
+    </div>
+    <div class="input-group">
+      <label for="longitude">Longitude:</label>
+      <input min="-180" max="180"  formControlName="longitude" type="number" id="longitude" name="longitude" placeholder="Enter longitude" step="0.000001">
+    </div>
+    <div class="input-group">
+      <label for="radius">Radius (meters):</label>
+      <input min="0" formControlName="radius" type="number" id="radius" name="radius" placeholder="Enter radius" step="1">
+    </div>
+    <button (click)="onSubmit()" [disabled]="nearbyLocationForm.invalid" class="btn btn-primary">Search</button>
+</div>
+
+<!-- SearchBar -->
+
+<!-- Nearby Places -->
+<div class="col-lg-7 mt-1 float-right" style="margin-right: calc(100vh - 33rem);">
+  <div class="card-title" style="text-align: center;">
+    Nearby Places
+  </div>
+  <br/>
+  <div *ngIf="nearbyLocations.length > 0" class="scrollable-div-vertical">
+    <div *ngFor="let nearby of nearbyLocations; let i = index" class="card-custom mb-2">
+      <div class="card-icon">
+        <img style="width: 1.5rem; height: 1.5rem" [src]=nearby.icon alt="">
+      </div>
+      <div class="card-title">
+        {{nearby.name}}
+      </div>
+      <div class="card-stars">
+        <div (click)="goToLink(i)" class="fa-solid fa-link mr-1" style="color: darkslategray; cursor: pointer"></div>
+        <i [title]=nearby.userRatingsTotal style="color: darkslategray" class="fa-solid fa-user icon-user mr-3"></i>
+        <i *ngFor="let like of nearby.likeRatings" class="fas fa-star"></i>
+        <i *ngFor="let unlike of nearby.unlikeRatings" class="fa-regular fa-star"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Nearby Places -->
+</div>
